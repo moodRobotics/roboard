@@ -1,0 +1,30 @@
+{
+  "name": "roboard",
+  "version": "0.0.1a",
+  "description": "Remote screen controled by robots. Create a cheap Videoconference, digital signage or dashboard with an old computer or raspberry pi connected to a small or large screen.",
+  "main": "roboard.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moodRobotics/roboard.git"
+  },
+  "keywords": [
+    "digital",
+    "signage",
+    "javascript",
+    "dashboard",
+    "videoconference"
+  ],
+  "author": "Mood Robotics",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moodRobotics/roboard/issues"
+  },
+  "homepage": "https://github.com/moodRobotics/roboard#readme",
+  "dependencies": {
+    "mqtt": "^4.2.6",
+    "puppeteer": "^5.5.0"
+  }
+}
