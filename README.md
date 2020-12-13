@@ -19,6 +19,8 @@ You can use these commands:
 
 ## Installation
 
+<npm install>
+
 ## Setup
 
 Edit config.js and complete this data:
