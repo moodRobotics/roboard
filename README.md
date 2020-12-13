@@ -23,6 +23,7 @@ If you want to use it with a raspbery pi (or an ARM processor)
 
 ```console
 sudo apt install chromium-browser chromium-codecs-ffmpeg
+sudo apt-get install cec-utils
 ```
 
 ```console
