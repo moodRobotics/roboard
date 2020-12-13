@@ -11,6 +11,7 @@ async function start() {
     headless: config.headless,
     defaultViewport: config.defaultViewport,
     args: config.args,
+    executablePath: config.executablePath
   })
   let pages = await browser.pages()
   page = pages[0]
@@ -24,7 +25,9 @@ if (config.mqtt.host) {
   client.on('connect', function () {
     client.subscribe(config.mqtt.commandtopic, function (err) {
       if (!err) {
-        client.publish(config.mqtt.infotopic, 'Hello mqtt')
+        client.publish(config.mqtt.infotopic, 'init '+name+" v."+version)
+      }else{
+        console.log("mqtt error ",err)
       }
     })
   })

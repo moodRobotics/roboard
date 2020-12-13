@@ -60,3 +60,4 @@ To do this, it leverages the great work of:
 - [hdmi-cec](https://github.com/jvanharn/node-hdmi-cec).
 - [node-cec](https://github.com/patlux/node-cec)
 - [MQTT](https://www.npmjs.com/package/mqtt).
+- [Puppeteer](https://github.com/puppeteer/puppeteer)
