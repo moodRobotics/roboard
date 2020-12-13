@@ -1,8 +1,13 @@
+const os = require('os');
 const puppeteer = require('puppeteer')
 var mqtt = require('mqtt')
 const config = require('./config.js')
 const name = 'roboard'
 const version = '0.0.1a'
+const hostname = os.hostname()
+const architecture = os.arch()
+let freemem = os.freemem()
+let loadavg = os.loadavg()
 let page
 
 //Open Chromium in full screen and load initial page
