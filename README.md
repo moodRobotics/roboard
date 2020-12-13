@@ -19,7 +19,15 @@ You can use these commands:
 
 ## Installation
 
-<npm install>
+If you want to use it with a raspbery pi (or an ARM processor)
+
+```console
+sudo apt install chromium-browser chromium-codecs-ffmpeg
+```
+
+```console
+npm install
+```
 
 ## Setup
 
@@ -37,6 +45,11 @@ Edit config.js and complete this data:
     commandtopic: "/devices/command/nikola",
     infotopic: "/devices/info/nikola"
 }
+
+If you run it on a Raspberry pi:
+
+- executablePath: '/usr/bin/chromium-browser'
+- args: ['--no-sandbox', '--disable-setuid-sandbox']
 
 ## Documentation
 
