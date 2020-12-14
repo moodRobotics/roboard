@@ -32,15 +32,18 @@ npm install
 
 ## Setup
 
-Edit config.js and complete this data:
+Edit config.js to configure how the chromium works:
 
-- deviceName: Use a Case Sensitive name without Spaces, "/", and special caracters.
 - args = [
         '--start-fullscreen' // you can also use '--start-fullscreen' or '--start-maximized'
 ];
 - defaultViewport = null;
 - headless = false;
-- splashUrl = "https://tolentinoabogados.com";
+
+and edit config.json to change the connection information (or delete the file):
+
+- deviceName: Use a Case Sensitive name without Spaces, "/", and special caracters.
+- splashUrl = "http://moodrobotics.com";
 - mqtt = {
     host: "mqtt://domain:PORT",
     commandtopic: "/devices/command/nikola",
@@ -62,3 +65,4 @@ To do this, it leverages the great work of:
 - [node-cec](https://github.com/patlux/node-cec)
 - [MQTT](https://www.npmjs.com/package/mqtt).
 - [Puppeteer](https://github.com/puppeteer/puppeteer)
+- [prompt-sync](https://github.com/heapwolf/prompt-sync) from David Mark Clements.
