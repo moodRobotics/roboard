@@ -5,26 +5,36 @@ const puppeteer = require('puppeteer')
 var mqtt = require('mqtt')
 const config = require('./config.js')
 const name = 'roboard'
-const version = '0.1.4-a'
+const version = '0.1.5-a'
 const configFilename = 'config.json'
 const hostname = os.hostname()
 const architecture = os.arch()
+const osname = os.type()
+const osversion = os.version()
 let freemem = os.freemem()
 let loadavg = os.loadavg()
 let page
+let pi = false
 
+console.log(name + ' v.' + version + ' (' + osname + '/' + osversion + ')')
 //Open Chromium in full screen and load initial page
+let args = config.args
+let executablePath = config.executablePath
+if (pi) {
+  args = config.argsPI
+  executablePath = config.executablePathPI
+}
 async function start() {
   const browser = await puppeteer.launch({
     headless: config.headless,
     defaultViewport: config.defaultViewport,
-    args: config.args,
-    executablePath: config.executablePath,
+    args: args,
+    executablePath: executablePath,
   })
   let pages = await browser.pages()
   page = pages[0]
   //   const page = await browser.newPage()
-  await page.goto(config.splashUrl)
+  await page.goto(configFile.splashUrl)
 }
 
 // First Time input data
@@ -36,24 +46,60 @@ try {
 } catch (e) {
   console.log('config.json ERROR')
 }
-if (!configFile.name) {
+if (!configFile.deviceName) {
+  const company = prompt('What is the company name? (mycompanyname): ')
+  if (company == '') {
+    configFile.company = 'mycompanyname'
+  } else {
+    configFile.company = company
+  }
   const name = prompt('What is the device name? (' + hostname + '): ')
-  configFile.deviceName = name
+  if (name == '') {
+    configFile.deviceName = hostname
+  } else {
+    configFile.deviceName = name
+  }
   const url = prompt('What is the splashUrl? (http://moodrobotics.com): ')
-  configFile.splashUrl = url
+  if (url == '') {
+    configFile.splashUrl = 'http://moodrobotics.com'
+  } else {
+    configFile.splashUrl = url
+  }
   const host = prompt('What is the MQTT server? (mqtt://DOMAIN:1883): ')
-  configFile.mqtt = {host: host}
-  const info = prompt('Topic info? (/company/device/info): ')
-  configFile.mqtt.infotopic = info
-  const commands = prompt('Topic commands? (/company/device/commands): ')
-  configFile.mqtt.commandtopic = commands
+  configFile.mqtt = { host: host }
+  const info = prompt(
+    'Topic info? (/' +
+      configFile.company +
+      '/device/info/' +
+      configFile.deviceName +
+      '): ',
+  )
+  if (info == '') {
+    configFile.mqtt.infotopic =
+      '/' + configFile.company + '/device/info/' + configFile.deviceName
+  } else {
+    configFile.mqtt.infotopic = info
+  }
+  const commands = prompt(
+    'Topic commands? (/' +
+      configFile.company +
+      '/device/command/' +
+      configFile.deviceName +
+      '): ',
+  )
+  if (commands == '') {
+    configFile.mqtt.commandtopic =
+      '/' + configFile.company + '/device/command/' + configFile.deviceName
+  } else {
+    configFile.mqtt.commandtopic = commands
+  }
 
   fs.writeFile(configFilename, JSON.stringify(configFile), (err) => {
     if (err) {
-        throw err;
+      throw err
     }
-    console.log(configFilename+" is saved.");
-});
+    console.log(configFilename + ' is saved.')
+  })
 }
 
 // MQTT connection
@@ -63,7 +109,10 @@ if (configFile.mqtt.host) {
   client.on('connect', function () {
     client.subscribe(configFile.mqtt.commandtopic, function (err) {
       if (!err) {
-        client.publish(configFile.mqtt.infotopic, 'init ' + name + ' v.' + version)
+        client.publish(
+          configFile.mqtt.infotopic,
+          'init ' + name + ' v.' + version,
+        )
       } else {
         console.log('mqtt error ', err)
       }
