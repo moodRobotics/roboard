@@ -1,6 +1,6 @@
 {
   "name": "roboard",
-  "version": "0.1.2a",
+  "version": "0.1.3a",
   "description": "Remote screen controled by robots. Create a cheap Videoconference, digital signage or dashboard with an old computer or raspberry pi connected to a small or large screen.",
   "main": "roboard.js",
   "scripts": {
@@ -28,5 +28,6 @@
     "node-cec": "^0.1.2",
     "prompt-sync": "^4.2.0",
     "puppeteer": "^5.5.0"
-  }
+  },
+  "files": ["LICENSE", "config.js", "roboard.js", "package.json", "README.md"]
 }
