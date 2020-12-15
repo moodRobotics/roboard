@@ -70,26 +70,26 @@ if (!configFile.deviceName) {
   const info = prompt(
     'Topic info? (/' +
       configFile.company +
-      '/device/info/' +
+      '/devices/info/' +
       configFile.deviceName +
       '): ',
   )
   if (info == '') {
     configFile.mqtt.infotopic =
-      '/' + configFile.company + '/device/info/' + configFile.deviceName
+      '/' + configFile.company + '/devices/info/' + configFile.deviceName
   } else {
     configFile.mqtt.infotopic = info
   }
   const commands = prompt(
     'Topic commands? (/' +
       configFile.company +
-      '/device/command/' +
+      '/devices/command/' +
       configFile.deviceName +
       '): ',
   )
   if (commands == '') {
     configFile.mqtt.commandtopic =
-      '/' + configFile.company + '/device/command/' + configFile.deviceName
+      '/' + configFile.company + '/devices/command/' + configFile.deviceName
   } else {
     configFile.mqtt.commandtopic = commands
   }
