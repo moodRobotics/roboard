@@ -17,6 +17,11 @@ let page
 let pi = false
 
 console.log(name + ' v.' + version + ' (' + osname + '/' + osversion + ')')
+// Check if is a Raspberry Pi
+if (osname == 'Linux') {
+  pi = true
+  console.log('Raspberry Pi detected')
+}
 //Open Chromium in full screen and load initial page
 let args = config.args
 let executablePath = config.executablePath
