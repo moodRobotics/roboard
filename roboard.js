@@ -9,6 +9,8 @@ const version = '0.1.5-a'
 const configFilename = 'config.json'
 const hostname = os.hostname()
 const architecture = os.arch()
+const platform = os.platform()
+const release = os.release()
 const osname = os.type()
 const osversion = os.version()
 let freemem = os.freemem()
@@ -16,7 +18,19 @@ let loadavg = os.loadavg()
 let page
 let pi = false
 
-console.log(name + ' v.' + version + ' (' + osname + '/' + osversion + ')')
+console.log(
+  name +
+    ' v.' +
+    version +
+    ' (' +
+    osname +
+    '/' +
+    architecture +
+    '/' +
+    osversion +
+    ')',
+)
+console.log(platform + '/' + release)
 // Check if is a Raspberry Pi
 if (osname == 'Linux') {
   pi = true
@@ -38,8 +52,10 @@ async function start() {
   })
   let pages = await browser.pages()
   page = pages[0]
+  console.log('Loading ' + configFile.splashUrl)
   //   const page = await browser.newPage()
   await page.goto(configFile.splashUrl)
+  console.log('Waiting for commands')
 }
 
 // First Time input data
@@ -49,7 +65,7 @@ try {
   console.log(contents)
   configFile = JSON.parse(contents)
 } catch (e) {
-  console.log('config.json ERROR')
+  console.log('config.json not found. Please enter this information:')
 }
 if (!configFile.deviceName) {
   const company = prompt('What is the company name? (mycompanyname): ')
