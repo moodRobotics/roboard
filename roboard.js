@@ -45,13 +45,15 @@ if (pi) {
 }
 async function start() {
   console.log('Opening browser')
-  const browser = await puppeteer.launch({
+  const browserconfig = {
     headless: config.headless,
     defaultViewport: config.defaultViewport,
     args: args,
-    product: exports.product,
+    product: config.product,
     executablePath: executablePath,
-  })
+  }
+  console.log('browser config: ' + JSON.stringify(browserconfig))
+  const browser = await puppeteer.launch(browserconfig)
   let pages = await browser.pages()
   page = pages[0]
   console.log('Loading ' + configFile.splashUrl)
