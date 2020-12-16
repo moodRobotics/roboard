@@ -32,7 +32,7 @@ console.log(
 )
 console.log(platform + '/' + release)
 // Check if is a Raspberry Pi
-if (osname == 'Linux') {
+if (osname == 'Linux' && architecture == 'arm') {
   pi = true
   console.log('Raspberry Pi detected')
 }
