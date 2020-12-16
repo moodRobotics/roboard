@@ -44,10 +44,12 @@ if (pi) {
   executablePath = config.executablePathPI
 }
 async function start() {
+  console.log('Opening browser')
   const browser = await puppeteer.launch({
     headless: config.headless,
     defaultViewport: config.defaultViewport,
     args: args,
+    product: exports.product,
     executablePath: executablePath,
   })
   let pages = await browser.pages()

@@ -8,3 +8,4 @@ exports.defaultViewport = null
 exports.headless = false
 exports.executablePath= ''
 exports.executablePathPI= '/usr/bin/chromium-browser'
+exports.product = 'chrome'
