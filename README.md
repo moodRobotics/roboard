@@ -19,41 +19,58 @@ You can use these commands:
 
 ## Installation
 
+You are going to need a computer with a screen.
+
+### Computers
+
+- PC. You ca use linux (prefered) or windows. I didn´t check a Apple but you can try.
+- Raspberry Pi, or may be Orange Pi or Banana or any fruit. I test with a Rpi 4 & 400, but a Zero Wifi may be a cheap and good option.
+
+### Screen
+
+- Computer screen
+- TV. I test this one, with the internal HDMI-CEC protocol, and is the best solution. It´s big, cheap and it works with and USB camera like a videoconference system without any contact (COVID Free).
 If you want to use it with a raspbery pi (or an ARM processor)
+
+### Raspberry Pi or linux configuration
 
 ```console
 sudo apt install chromium-browser chromium-codecs-ffmpeg
-sudo apt-get install cec-utils
+sudo apt install cec-utils
+sudo apt install npm
+md roboard
+cd roboard
+npm i roboard
+npm install
+```
+
+edit the file: /etc/xdg/lxsession/LXDE/autostart
+comment out a xscreensaver command, and add these xset lines
+
+```script
+#@xscreensaver -no-splash
+@xset s off
+@xset -dpms
+@xset s noblank
 ```
 
 ```console
-npm install
+node roboard.js
 ```
 
 ## Setup
 
-Edit config.js to configure how the chromium works:
+First time you are going to write this information:
 
-- args = [
-        '--start-fullscreen' // you can also use '--start-fullscreen' or '--start-maximized'
-];
-- defaultViewport = null;
-- headless = false;
+- company name (only to help for creating the topics) no spaces or special caracters.
+- device name: no spaces or special caracters.
+- splasUrl: The default url for the screen. Please write *http://* or *https://*.
+- mqtt server: Begin with *mqtt://* the domain, and finish with *:* and port number only if is different to 1883.
+- infotopic: The topic you are going to use to know how is working, suscribe it.
+- commandtopic: The topic you are going to use to send commands, publish in there.
 
-and edit config.json to change the connection information (or delete the file):
-
-- deviceName: Use a Case Sensitive name without Spaces, "/", and special caracters.
-- splashUrl = "http://moodrobotics.com";
-- mqtt = {
-    host: "mqtt://domain:PORT",
-    commandtopic: "/devices/command/nikola",
-    infotopic: "/devices/info/nikola"
-}
-
-If you run it on a Raspberry pi:
-
-- executablePath: '/usr/bin/chromium-browser'
-- args: ['--no-sandbox', '--disable-setuid-sandbox']
+Edit config.js to configure how the chromium works only if you want to change something.
+Remember to do not use the root user to activate the roboard application.
 
 ## Documentation
 

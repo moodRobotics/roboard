@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer')
 var mqtt = require('mqtt')
 const config = require('./config.js')
 const name = 'roboard'
-const version = '0.1.5-a'
+const version = '0.1.6-a'
 const configFilename = 'config.json'
 const hostname = os.hostname()
 const architecture = os.arch()
@@ -49,6 +49,7 @@ async function start() {
     headless: config.headless,
     defaultViewport: config.defaultViewport,
     args: args,
+    ignoreDefaultArgs: config.ignoreDefaultArgs,
     product: config.product,
     executablePath: executablePath,
   }
